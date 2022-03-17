@@ -87,7 +87,7 @@ services:
       #KEYCLOAK_IMPORT: /tmp/live-chat-realm-export.json
     image: jboss/keycloak:${KEYCLOAK_VERSION}
     volumes:
-      - keycloak-data-volume:/var/lib/keycloak/data
+      - ./keycloak:/var/lib/keycloak/data
     ports:
       - "8081:8080"
       - "9990:9990"

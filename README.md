@@ -64,5 +64,13 @@ yarn dev
 http://live.chat.local
 ```
 
+7- There are Two already created users in the keycloak server
+```
+- "user1" with password "user1"
+- "user2" with password "user2"
+```
+
+Open two navigators, or an incognito with a regular session in your favorite navigator to try out the live functionality
+
 I highly recommande to support this two projects which I think have a great potentiel to be in your future stack
 Enjoy

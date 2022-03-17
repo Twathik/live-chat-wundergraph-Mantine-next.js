@@ -33,4 +33,5 @@ fi
 
 sh keycloak.sh
 yarn
+yarn global add @wundergraph/wunderctl@latest
 yarn migrate

@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^17.0.18",
-    "@wundergraph/sdk": "0.84.0",
+    "@wundergraph/sdk": "0.85.0",
     "concurrently": "^7.0.0",
     "dotenv-cli": "^5.0.0",
     "fastify": "^3.27.2",

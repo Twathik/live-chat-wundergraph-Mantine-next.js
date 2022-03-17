@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, Paper, Group, PaperProps, Button } from '@mantine/core';
-import { GithubButton } from '../../../SocialButtons/SocialButtons';
 import { useWunderGraph } from '../../../../../wunderClient/hooks';
 
 const AuthenticationForm = (props: PaperProps<'div'>) => {
@@ -15,11 +14,11 @@ const AuthenticationForm = (props: PaperProps<'div'>) => {
       </Text>
 
       <Group grow mb="md" mt="md">
-        <GithubButton radius="xl" onClick={() => login.github()}>
+        {/*  <GithubButton radius="xl" onClick={() => login.github()}>
           Github
-        </GithubButton>
+        </GithubButton> */}
         <Button radius="xl" onClick={() => login.keycloak()}>
-          Local Server
+          Local Auth Server
         </Button>
       </Group>
     </Paper>

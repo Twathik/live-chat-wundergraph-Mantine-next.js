@@ -243,6 +243,7 @@ export interface HooksConfig {
 			mockResolve?: (ctx: Context) => Promise<GetUsersResponse>;
 			preResolve?: (ctx: Context) => Promise<void>;
 			postResolve?: (ctx: Context, response: GetUsersResponse) => Promise<void>;
+			customResolve?: (ctx: Context) => Promise<void | GetUsersResponse>;
 			mutatingPostResolve?: (ctx: Context, response: GetUsersResponse) => Promise<GetUsersResponse>;
 		};
 		GetMessages?: {
@@ -250,6 +251,7 @@ export interface HooksConfig {
 			preResolve?: (ctx: Context, input: InjectedGetMessagesInput) => Promise<void>;
 			mutatingPreResolve?: (ctx: Context, input: InjectedGetMessagesInput) => Promise<InjectedGetMessagesInput>;
 			postResolve?: (ctx: Context, input: InjectedGetMessagesInput, response: GetMessagesResponse) => Promise<void>;
+			customResolve?: (ctx: Context, input: InjectedGetMessagesInput) => Promise<void | GetMessagesResponse>;
 			mutatingPostResolve?: (
 				ctx: Context,
 				input: InjectedGetMessagesInput,
@@ -261,6 +263,7 @@ export interface HooksConfig {
 			preResolve?: (ctx: Context, input: InjectedGetUserInput) => Promise<void>;
 			mutatingPreResolve?: (ctx: Context, input: InjectedGetUserInput) => Promise<InjectedGetUserInput>;
 			postResolve?: (ctx: Context, input: InjectedGetUserInput, response: GetUserResponse) => Promise<void>;
+			customResolve?: (ctx: Context, input: InjectedGetUserInput) => Promise<void | GetUserResponse>;
 			mutatingPostResolve?: (
 				ctx: Context,
 				input: InjectedGetUserInput,
@@ -274,6 +277,7 @@ export interface HooksConfig {
 			preResolve?: (ctx: Context, input: InjectedCreateMessageInput) => Promise<void>;
 			mutatingPreResolve?: (ctx: Context, input: InjectedCreateMessageInput) => Promise<InjectedCreateMessageInput>;
 			postResolve?: (ctx: Context, input: InjectedCreateMessageInput, response: CreateMessageResponse) => Promise<void>;
+			customResolve?: (ctx: Context, input: InjectedCreateMessageInput) => Promise<void | CreateMessageResponse>;
 			mutatingPostResolve?: (
 				ctx: Context,
 				input: InjectedCreateMessageInput,
@@ -289,6 +293,7 @@ export interface HooksConfig {
 				input: InjectedUpdateAvatarIdInput,
 				response: UpdateAvatarIdResponse
 			) => Promise<void>;
+			customResolve?: (ctx: Context, input: InjectedUpdateAvatarIdInput) => Promise<void | UpdateAvatarIdResponse>;
 			mutatingPostResolve?: (
 				ctx: Context,
 				input: InjectedUpdateAvatarIdInput,
@@ -300,6 +305,7 @@ export interface HooksConfig {
 			preResolve?: (ctx: Context, input: InjectedUpdateProfileInput) => Promise<void>;
 			mutatingPreResolve?: (ctx: Context, input: InjectedUpdateProfileInput) => Promise<InjectedUpdateProfileInput>;
 			postResolve?: (ctx: Context, input: InjectedUpdateProfileInput, response: UpdateProfileResponse) => Promise<void>;
+			customResolve?: (ctx: Context, input: InjectedUpdateProfileInput) => Promise<void | UpdateProfileResponse>;
 			mutatingPostResolve?: (
 				ctx: Context,
 				input: InjectedUpdateProfileInput,
@@ -311,6 +317,7 @@ export interface HooksConfig {
 			preResolve?: (ctx: Context, input: InjectedUserCreateInput) => Promise<void>;
 			mutatingPreResolve?: (ctx: Context, input: InjectedUserCreateInput) => Promise<InjectedUserCreateInput>;
 			postResolve?: (ctx: Context, input: InjectedUserCreateInput, response: UserCreateResponse) => Promise<void>;
+			customResolve?: (ctx: Context, input: InjectedUserCreateInput) => Promise<void | UserCreateResponse>;
 			mutatingPostResolve?: (
 				ctx: Context,
 				input: InjectedUserCreateInput,
@@ -322,6 +329,7 @@ export interface HooksConfig {
 			preResolve?: (ctx: Context, input: InjectedUserUpdateInput) => Promise<void>;
 			mutatingPreResolve?: (ctx: Context, input: InjectedUserUpdateInput) => Promise<InjectedUserUpdateInput>;
 			postResolve?: (ctx: Context, input: InjectedUserUpdateInput, response: UserUpdateResponse) => Promise<void>;
+			customResolve?: (ctx: Context, input: InjectedUserUpdateInput) => Promise<void | UserUpdateResponse>;
 			mutatingPostResolve?: (
 				ctx: Context,
 				input: InjectedUserUpdateInput,
@@ -333,6 +341,7 @@ export interface HooksConfig {
 			preResolve?: (ctx: Context, input: InjectedUserUpsertInput) => Promise<void>;
 			mutatingPreResolve?: (ctx: Context, input: InjectedUserUpsertInput) => Promise<InjectedUserUpsertInput>;
 			postResolve?: (ctx: Context, input: InjectedUserUpsertInput, response: UserUpsertResponse) => Promise<void>;
+			customResolve?: (ctx: Context, input: InjectedUserUpsertInput) => Promise<void | UserUpsertResponse>;
 			mutatingPostResolve?: (
 				ctx: Context,
 				input: InjectedUserUpsertInput,
@@ -597,6 +606,23 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 					}
 				}
 			);
+			// customResolve
+			fastify.post<{ Body: {} }>("/operation/GetUsers/customResolve", async (request, reply) => {
+				reply.type("application/json").code(200);
+				try {
+					const out = await config?.queries?.GetUsers?.customResolve?.(request.ctx);
+					return {
+						op: "GetUsers",
+						hook: "customResolve",
+						response: out || null,
+						setClientRequestHeaders: request.setClientRequestHeaders,
+					};
+				} catch (err) {
+					request.log.error(err);
+					reply.code(500);
+					return { op: "GetUsers", hook: "customResolve", error: err };
+				}
+			});
 
 			// mock
 			fastify.post<{ Body: { input: InjectedGetMessagesInput } }>(
@@ -701,6 +727,26 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 					}
 				}
 			);
+			// customResolve
+			fastify.post<{ Body: { input: InjectedGetMessagesInput } }>(
+				"/operation/GetMessages/customResolve",
+				async (request, reply) => {
+					reply.type("application/json").code(200);
+					try {
+						const out = await config?.queries?.GetMessages?.customResolve?.(request.ctx, request.body.input);
+						return {
+							op: "GetMessages",
+							hook: "customResolve",
+							response: out || null,
+							setClientRequestHeaders: request.setClientRequestHeaders,
+						};
+					} catch (err) {
+						request.log.error(err);
+						reply.code(500);
+						return { op: "GetMessages", hook: "customResolve", error: err };
+					}
+				}
+			);
 
 			// mock
 			fastify.post<{ Body: { input: InjectedGetUserInput } }>(
@@ -802,6 +848,26 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 						request.log.error(err);
 						reply.code(500);
 						return { op: "GetUser", hook: "mutatingPostResolve", error: err };
+					}
+				}
+			);
+			// customResolve
+			fastify.post<{ Body: { input: InjectedGetUserInput } }>(
+				"/operation/GetUser/customResolve",
+				async (request, reply) => {
+					reply.type("application/json").code(200);
+					try {
+						const out = await config?.queries?.GetUser?.customResolve?.(request.ctx, request.body.input);
+						return {
+							op: "GetUser",
+							hook: "customResolve",
+							response: out || null,
+							setClientRequestHeaders: request.setClientRequestHeaders,
+						};
+					} catch (err) {
+						request.log.error(err);
+						reply.code(500);
+						return { op: "GetUser", hook: "customResolve", error: err };
 					}
 				}
 			);
@@ -920,6 +986,26 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 					}
 				}
 			);
+			// customResolve
+			fastify.post<{ Body: { input: InjectedCreateMessageInput } }>(
+				"/operation/CreateMessage/customResolve",
+				async (request, reply) => {
+					reply.type("application/json").code(200);
+					try {
+						const out = await config?.mutations?.CreateMessage?.customResolve?.(request.ctx, request.body.input);
+						return {
+							op: "CreateMessage",
+							hook: "customResolve",
+							response: out || null,
+							setClientRequestHeaders: request.setClientRequestHeaders,
+						};
+					} catch (err) {
+						request.log.error(err);
+						reply.code(500);
+						return { op: "CreateMessage", hook: "customResolve", error: err };
+					}
+				}
+			);
 
 			// mock
 			fastify.post<{ Body: { input: InjectedUpdateAvatarIdInput } }>(
@@ -1028,6 +1114,26 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 						request.log.error(err);
 						reply.code(500);
 						return { op: "UpdateAvatarId", hook: "mutatingPostResolve", error: err };
+					}
+				}
+			);
+			// customResolve
+			fastify.post<{ Body: { input: InjectedUpdateAvatarIdInput } }>(
+				"/operation/UpdateAvatarId/customResolve",
+				async (request, reply) => {
+					reply.type("application/json").code(200);
+					try {
+						const out = await config?.mutations?.UpdateAvatarId?.customResolve?.(request.ctx, request.body.input);
+						return {
+							op: "UpdateAvatarId",
+							hook: "customResolve",
+							response: out || null,
+							setClientRequestHeaders: request.setClientRequestHeaders,
+						};
+					} catch (err) {
+						request.log.error(err);
+						reply.code(500);
+						return { op: "UpdateAvatarId", hook: "customResolve", error: err };
 					}
 				}
 			);
@@ -1142,6 +1248,26 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 					}
 				}
 			);
+			// customResolve
+			fastify.post<{ Body: { input: InjectedUpdateProfileInput } }>(
+				"/operation/UpdateProfile/customResolve",
+				async (request, reply) => {
+					reply.type("application/json").code(200);
+					try {
+						const out = await config?.mutations?.UpdateProfile?.customResolve?.(request.ctx, request.body.input);
+						return {
+							op: "UpdateProfile",
+							hook: "customResolve",
+							response: out || null,
+							setClientRequestHeaders: request.setClientRequestHeaders,
+						};
+					} catch (err) {
+						request.log.error(err);
+						reply.code(500);
+						return { op: "UpdateProfile", hook: "customResolve", error: err };
+					}
+				}
+			);
 
 			// mock
 			fastify.post<{ Body: { input: InjectedUserCreateInput } }>(
@@ -1243,6 +1369,26 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 						request.log.error(err);
 						reply.code(500);
 						return { op: "UserCreate", hook: "mutatingPostResolve", error: err };
+					}
+				}
+			);
+			// customResolve
+			fastify.post<{ Body: { input: InjectedUserCreateInput } }>(
+				"/operation/UserCreate/customResolve",
+				async (request, reply) => {
+					reply.type("application/json").code(200);
+					try {
+						const out = await config?.mutations?.UserCreate?.customResolve?.(request.ctx, request.body.input);
+						return {
+							op: "UserCreate",
+							hook: "customResolve",
+							response: out || null,
+							setClientRequestHeaders: request.setClientRequestHeaders,
+						};
+					} catch (err) {
+						request.log.error(err);
+						reply.code(500);
+						return { op: "UserCreate", hook: "customResolve", error: err };
 					}
 				}
 			);
@@ -1350,6 +1496,26 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 					}
 				}
 			);
+			// customResolve
+			fastify.post<{ Body: { input: InjectedUserUpdateInput } }>(
+				"/operation/UserUpdate/customResolve",
+				async (request, reply) => {
+					reply.type("application/json").code(200);
+					try {
+						const out = await config?.mutations?.UserUpdate?.customResolve?.(request.ctx, request.body.input);
+						return {
+							op: "UserUpdate",
+							hook: "customResolve",
+							response: out || null,
+							setClientRequestHeaders: request.setClientRequestHeaders,
+						};
+					} catch (err) {
+						request.log.error(err);
+						reply.code(500);
+						return { op: "UserUpdate", hook: "customResolve", error: err };
+					}
+				}
+			);
 
 			// mock
 			fastify.post<{ Body: { input: InjectedUserUpsertInput } }>(
@@ -1451,6 +1617,26 @@ export const configureWunderGraphHooks = (config: HooksConfig) => {
 						request.log.error(err);
 						reply.code(500);
 						return { op: "UserUpsert", hook: "mutatingPostResolve", error: err };
+					}
+				}
+			);
+			// customResolve
+			fastify.post<{ Body: { input: InjectedUserUpsertInput } }>(
+				"/operation/UserUpsert/customResolve",
+				async (request, reply) => {
+					reply.type("application/json").code(200);
+					try {
+						const out = await config?.mutations?.UserUpsert?.customResolve?.(request.ctx, request.body.input);
+						return {
+							op: "UserUpsert",
+							hook: "customResolve",
+							response: out || null,
+							setClientRequestHeaders: request.setClientRequestHeaders,
+						};
+					} catch (err) {
+						request.log.error(err);
+						reply.code(500);
+						return { op: "UserUpsert", hook: "customResolve", error: err };
 					}
 				}
 			);

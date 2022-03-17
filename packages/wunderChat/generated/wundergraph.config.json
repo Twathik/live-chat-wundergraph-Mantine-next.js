@@ -47,7 +47,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -95,7 +96,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -142,7 +144,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -194,7 +197,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -242,7 +246,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -290,7 +295,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -333,7 +339,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -381,7 +388,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -424,7 +432,8 @@
             "subscriptionPollingIntervalMillis": 0
           },
           "httpTransportOnResponse": false,
-          "httpTransportOnRequest": false
+          "httpTransportOnRequest": false,
+          "customResolve": false
         },
         "variablesConfiguration": {
           "injectVariables": []
@@ -7242,7 +7251,7 @@
                 "environmentVariableDefaultValue": "",
                 "environmentVariableName": "",
                 "placeholderVariableName": "",
-                "staticVariableContent": "nBz4rujoyiIwPS6863tS5dE2z8NsmD2V"
+                "staticVariableContent": "6KEAotV7sZ8Jxv0mjvaGai2HogVzXuhY"
               },
               "issuer": {
                 "kind": 0,

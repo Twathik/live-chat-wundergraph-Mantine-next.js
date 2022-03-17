@@ -39,3 +39,5 @@ buildCommand.txt
 **/generated/bundle
 **/generated/prisma
 Docker/database
+
+.vscode

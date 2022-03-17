@@ -1,0 +1,4 @@
+{
+   "clientId":"live-chat",
+   "redirectUris": ["http://api.live.chat.local/*", "http://localhost:9991/*"]
+}

@@ -18,6 +18,8 @@ Project dependencies
 - [postgres](https://www.postgresql.org/)
 - [minio](https://min.io/)
 
+Make sure you have curl and [jq](https://stedolan.github.io/jq/) installed before continue.
+
 1- Run the script setup.sh to auto config the minio instances and to fire up the docker-compose instance
 
 ```
@@ -29,6 +31,12 @@ Wait for the keyclok server to be ready, you should see at the bottom of the log
 
 ```
 WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
+```
+
+Then run the second script to configure keycloak
+
+```
+sh keycloak.sh
 ```
 
 2- install packages: this example uses yarn workspaces, to install all dependencies on a raw run yarn at the root of the project
@@ -58,16 +66,17 @@ yarn dev
 127.0.0.1 storage.live.chat.local
 ```
 
-6- the server should be reachable from
+6- The server should be reachable from
 
 ```
 http://live.chat.local
 ```
 
-7- There are Two already created users in the keycloak server
+Two users have been created from stage 2
+
 ```
-- "user1" with password "user1"
-- "user2" with password "user2"
+- user1 password user1
+- user2 password user2
 ```
 
 Open two navigators, or an incognito with a regular session in your favorite navigator to try out the live functionality

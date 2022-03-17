@@ -1,0 +1,8 @@
+{
+   "realm":"LiveChat",
+   "notBefore":0,
+   "enabled":true,
+   "bruteForceProtected":true,
+   "failureFactor":10,
+   "eventsEnabled":false
+}

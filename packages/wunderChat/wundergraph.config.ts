@@ -9,6 +9,7 @@ import {
 } from "@wundergraph/sdk";
 import wunderGraphHooks from "./wundergraph.hooks";
 import operations from "./wundergraph.operations";
+import "dotenv/config";
 
 /*
 uncomment this section to create an API from multiple federated GraphQL upstreams
@@ -94,7 +95,7 @@ configureWunderGraphApplication({
         authProviders.openIdConnect({
           id: "keycloak", // you have to choose this ID
           clientId: "live-chat", // client ID from Auth0
-          clientSecret: "w73IQhSOz8W1T9eqJA0CMrSoRWRf43lX", // client secret from Auth0
+          clientSecret: process.env.client_secret || "", // client secret from Auth0
           issuer: "http://keycloak.local/auth/realms/LiveChat",
         }),
         authProviders.demo(),

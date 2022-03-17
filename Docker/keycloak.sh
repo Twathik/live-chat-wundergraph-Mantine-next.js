@@ -22,7 +22,7 @@ until [ ${RET} -eq 0 ]; do
     
     RET=$?
 
-    if [${RET} -ne 0 ]; then
+    if [ ${RET} -ne 0 ]; then
       echo Keycloak not ready, retrying in 20 seconds...
       sleep 20
     fi

@@ -21,8 +21,8 @@ until [ ${RET} -eq 0 ]; do
     "${KEYCLOAK_URL}/auth/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token"|jq -r '.access_token')
 
     RET=$?
-
-    echo Keycloak not ready, retrying in 10 seconds...
+    echo Keycloak not ready, retrying in 20 seconds...
+    sleep 20
 done
 
 

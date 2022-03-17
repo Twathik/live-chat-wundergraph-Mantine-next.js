@@ -3,5 +3,8 @@
   "enabled": true,
   "firstName": "anakin",
   "lastName": "skywalker",
-  "email": "user2@local.io"
+  "email": "user2@local.io",
+  "credentials":[
+    {"type":"password","value":"user2","temporary":false}
+  ]
 }

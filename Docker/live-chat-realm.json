@@ -4,5 +4,6 @@
    "enabled":true,
    "bruteForceProtected":true,
    "failureFactor":10,
-   "eventsEnabled":false
+   "eventsEnabled":false,
+   "loginWithEmailAllowed":false
 }

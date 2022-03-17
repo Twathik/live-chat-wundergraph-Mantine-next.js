@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+      "sourceMap": true,
+      "removeComments": true,
+
+      "module": "esnext",
+      "target": "ES2019",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+
+      "allowJs": true,
+      "skipLibCheck": true,
+      "types": [ "node"],
+      "forceConsistentCasingInFileNames": true,
+      "noEmit": false,
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+
+      "strict": true,
+      "noImplicitAny": false,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "noImplicitThis": true,
+      "alwaysStrict": true,
+
+      "jsx": "preserve",
+      
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "resolveJsonModule": true,
+    },
+    "exclude": [
+      "node_modules",
+      "**/examples",
+      "**/dist/**/*",
+      "**/public/**/*",
+      "**/prisma/**/*",
+      "**/next.config.js"
+    ]
+  }

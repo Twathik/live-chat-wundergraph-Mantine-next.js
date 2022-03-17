@@ -1,0 +1,10 @@
+mutation(
+  $message: String!
+  $email: String! @fromClaim(name: EMAIL)
+){
+  usersDb_createOneChat(data: {message: $message, User: {connect : {email: $email }}}) {
+    id
+    message
+    userId
+  }
+}

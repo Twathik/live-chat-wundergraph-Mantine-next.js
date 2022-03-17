@@ -1,0 +1,11 @@
+query(
+  $email: String! @fromClaim(name: EMAIL)
+)
+{
+  usersDb_findUniqueUser(where: {email: $email}) {
+    id
+    firstName
+    lastName
+    email
+  }
+}

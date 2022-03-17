@@ -1,0 +1,14 @@
+mutation (
+  $email: String! @fromClaim(name: EMAIL)
+  $avatarId: usersDb_NullableStringFieldUpdateOperationsInput
+    @jsonSchema(
+      title: "AvatarId"
+      description: "Write something meaningful"
+      pattern: "^[a-zA-Z 0-9]+$"
+    )
+) {
+  usersDb_updateOneUser(where: {email: $email}, data: { avatarId: $avatarId }) {
+    id
+    avatarId
+  }
+}

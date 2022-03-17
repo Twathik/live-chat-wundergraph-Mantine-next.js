@@ -1,0 +1,15 @@
+mutation (
+  $email: String! @fromClaim(name: EMAIL)
+  $firstName: usersDb_StringFieldUpdateOperationsInput!
+  $lastName: usersDb_StringFieldUpdateOperationsInput!
+) {
+  usersDb_updateOneUser(
+    where: {email: $email}
+    data: {
+      firstName: $firstName
+      lastName: $lastName
+    }
+  ) {
+    id
+  }
+}

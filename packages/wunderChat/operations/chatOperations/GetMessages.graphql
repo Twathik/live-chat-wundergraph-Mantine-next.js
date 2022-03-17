@@ -1,0 +1,14 @@
+query(
+  $take: Int
+  $skip: Int
+){
+  usersDb_findManyChat(orderBy: [{id:asc}], take: $take, skip: $skip ) {
+    id
+    message
+    createdAt
+    User {
+      userId
+      firstName
+    }
+  }
+}

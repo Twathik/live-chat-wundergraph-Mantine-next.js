@@ -1,0 +1,14 @@
+[http]
+  [http.routers]
+    [http.routers.backend-route]
+      entryPoints = ["web"]
+      service = "backend"
+      rule = "Host(`api.live.chat.local`)"
+
+  [http.services]
+    [http.services.backend]
+      [http.services.backend.loadBalancer]
+        [[http.services.backend.loadBalancer.servers]]
+          url = "http://host.docker.internal:9991"
+
+

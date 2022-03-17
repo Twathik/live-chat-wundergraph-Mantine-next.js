@@ -1,0 +1,14 @@
+[http]
+  [http.routers]
+    [http.routers.frontend-route]
+      entryPoints = ["web"]
+      service = "frontend"
+      rule = "Host(`live.chat.local`)"
+
+  [http.services]
+    [http.services.frontend]
+      [http.services.frontend.loadBalancer]
+        [[http.services.frontend.loadBalancer.servers]]
+          url = "http://host.docker.internal:3000"
+
+

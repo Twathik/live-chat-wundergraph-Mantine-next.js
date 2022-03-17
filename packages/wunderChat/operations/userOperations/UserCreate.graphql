@@ -1,0 +1,27 @@
+mutation (
+  $email: String!
+  $userId: String!
+  $name: String!
+  $lastName: String!
+  $firstName: String!
+    @jsonSchema(
+      title: "Prénom"
+      description: "Veuillez introduire votre prénom"
+      minLength: 2
+      maxLength: 250
+    )
+  
+) {
+  usersDb_createOneUser(
+    data: {
+      email: $email
+      userId: $userId
+      name: $name
+      lastName: $lastName
+      firstName: $firstName
+
+    }
+  ) {
+    id
+  }
+}

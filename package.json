@@ -1,0 +1,18 @@
+{
+  "name": "bolt2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/**/*"
+  ],
+  "scripts": {
+    "migrate": "concurrently \"wsrun --parallel migrate\"",
+    "dev": "concurrently \"wsrun --parallel dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "wsrun": "^5.2.0"
+  }
+}

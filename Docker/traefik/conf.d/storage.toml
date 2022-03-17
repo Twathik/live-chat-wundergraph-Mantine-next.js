@@ -1,0 +1,14 @@
+[http]
+  [http.routers]
+    [http.routers.storage-route]
+      entryPoints = ["web"]
+      service = "storage"
+      rule = "Host(`storage.live.chat.local`)"
+
+  [http.services]
+    [http.services.storage]
+      [http.services.storage.loadBalancer]
+        [[http.services.storage.loadBalancer.servers]]
+          url = "http://host.docker.internal:9000"
+
+

@@ -1,0 +1,18 @@
+mutation (
+  $userId: String!
+  $create: usersDb_UserCreateInput!
+  $update: usersDb_UserUpdateInput!
+) {
+  usersDb_upsertOneUser(
+    where: { userId: $userId }
+    create: $create
+    update: $update
+  ) {
+    id
+    email
+    name
+    avatarId
+    firstName
+    lastName
+  }
+}

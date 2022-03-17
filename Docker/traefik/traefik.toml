@@ -1,0 +1,20 @@
+[accesslog]
+[api]
+  insecure=true
+  dashboard=true
+  debug=true
+
+[log]
+  level="INFO"
+
+[entryPoints]
+  [entryPoints.web]
+    address=":80"
+
+[providers.file]
+  directory = "/etc/traefik/conf.d/"             
+  watch = true
+
+[providers.docker]
+  endpoint = "unix:///var/run/docker.sock"
+  exposedByDefault = false

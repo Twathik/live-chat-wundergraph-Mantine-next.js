@@ -19,10 +19,14 @@ until [ ${RET} -eq 0 ]; do
     -d "grant_type=password" \
     -d 'client_id=admin-cli' \
     "${KEYCLOAK_URL}/auth/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token"|jq -r '.access_token')
-
+    
     RET=$?
-    echo Keycloak not ready, retrying in 20 seconds...
-    sleep 20
+
+    if [${RET} -eq 1 ]; then
+      echo Keycloak not ready, retrying in 20 seconds...
+      sleep 20
+    fi
+    
 done
 
 

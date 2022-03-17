@@ -20,44 +20,21 @@ Project dependencies
 
 Make sure you have curl and [jq](https://stedolan.github.io/jq/) installed before continue.
 
-1- Run the script setup.sh to auto config the minio instances and to fire up the docker-compose instance
+1- Run the script setup.sh to auto config the minio instances and to fire up the docker-compose instance, auto config keycloak server,install dependencies and apply migration to database
 
 ```
 cd Docker
 sh setup.sh
 ```
 
-Wait for the keyclok server to be ready, you should see at the bottom of the logs
 
-```
-WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
-```
-
-Then run the second script to configure keycloak
-
-```
-sh keycloak.sh
-```
-
-2- install packages: this example uses yarn workspaces, to install all dependencies on a raw run yarn at the root of the project
-
-```
-yarn
-```
-
-3- Migrate the database: we use prisma under the hood
-
-```
-yarn migrate
-```
-
-4- start the servers: concurrently and wsrun will start all the servers at once
+2- start the servers: concurrently and wsrun will start all the servers at once
 
 ```
 yarn dev
 ```
 
-5- Add this entries to your "/etc/hosts" file
+3- Add this entries to your "/etc/hosts" file
 
 ```
 127.0.0.1 keycloak.local
@@ -66,13 +43,13 @@ yarn dev
 127.0.0.1 storage.live.chat.local
 ```
 
-6- The server should be reachable from
+4- The server should be reachable from
 
 ```
 http://live.chat.local
 ```
 
-Two users have been created from stage 2
+Two users have been created
 
 ```
 - user1 password user1

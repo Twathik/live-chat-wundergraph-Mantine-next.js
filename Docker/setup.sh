@@ -30,3 +30,7 @@ if [ ${retry} -ge ${maxRetries} ]; then
   echo "Failed after ${maxRetries} attempts!"
   exit 1
 fi
+
+sh keycloak.sh
+yarn
+yarn migrate

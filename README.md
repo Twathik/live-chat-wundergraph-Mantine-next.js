@@ -7,8 +7,6 @@ This project is just to play around with some Wundergraph functionalities, you c
 Mantine is also an excellent ui library for react developers, it includes more than [120 customizable components and hooks](https://ui.mantine.dev/) to cover you in any situation
 
 
-I highly recommande to support this two projects which I think have a great potentiel to be in your future stacks as fullstack dev
-
 Project dependencies
 
 - [wundergraph](https://wundergraph.com/)
@@ -33,7 +31,7 @@ Wait for the keyclok server to be ready, you should see at the bottom of the log
 WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
 ```
 
-2- install package: this example use yarn workspaces, to install all dependencies on a raw run yarn at the root of the project
+2- install packages: this example uses yarn workspaces, to install all dependencies on a raw run yarn at the root of the project
 
 ```
 yarn
@@ -65,3 +63,6 @@ yarn dev
 ```
 http://live.chat.local
 ```
+
+I highly recommande to support this two projects which I think have a great potentiel to be in your future stack
+Enjoy

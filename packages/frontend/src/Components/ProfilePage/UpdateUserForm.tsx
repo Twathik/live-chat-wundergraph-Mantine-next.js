@@ -128,7 +128,9 @@ const UpdateUserForm = ({ localUser }: UpdateUserFormProps): React.ReactElement 
           />
         )}
       </Dropzone>
-
+      <Text align="center" color="dimmed" size="sm">
+        Click on the avatar to upload a new one, your avatar will change on the next login
+      </Text>
       <Text align="center" color="dimmed" size="sm">
         {localUser?.email}
       </Text>

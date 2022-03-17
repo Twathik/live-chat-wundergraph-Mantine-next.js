@@ -22,7 +22,7 @@ until [ ${RET} -eq 0 ]; do
     
     RET=$?
 
-    if [${RET} -eq 1 ]; then
+    if [${RET} -ne 0 ]; then
       echo Keycloak not ready, retrying in 20 seconds...
       sleep 20
     fi
@@ -39,13 +39,6 @@ ${CURL_CMD} \
   "${KEYCLOAK_URL}/auth/admin/realms";
 
 echo "\n${NEW_REALM} realm created ...\n"\
-
-  ${CURL_CMD} \
-  -X GET \
-  -H "Accept: application/json" \
-  -H "Authorization: Bearer ${ACCESS_TOKEN}" \
-  "${KEYCLOAK_URL}/auth/admin/realms/${NEW_REALM}"|jq -r .|head;
-
   
 ${CURL_CMD} \
   -X POST \

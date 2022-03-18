@@ -16,22 +16,29 @@ const HomePage = ({ messages }: HomePageProps) => (
 export const getServerSideProps: GetServerSideProps = async ({
   req,
 }: GetServerSidePropsContext) => {
-  const client = new Client({ extraHeaders: { cookie: req.headers.cookie || '' } });
-  const messagesData = await client.query.GetMessages({ input: { skip: 0, take: -10 } });
+  try {
+    const client = new Client({ extraHeaders: { cookie: req.headers.cookie || '' } });
+    const messagesData = await client.query.GetMessages({ input: { skip: 0, take: -10 } });
 
-  if (messagesData.status === 'ok') {
+    if (messagesData.status === 'ok') {
+      return {
+        props: {
+          messages: messagesData.body.data!.usersDb_findManyChat,
+        },
+      };
+    }
     return {
-      props: {
-        messages: messagesData.body.data!.usersDb_findManyChat,
+      redirect: {
+        destination: '/',
+        permanent: false,
       },
     };
+  } catch (error) {
+    console.log({ error });
+    return {
+      props: {},
+    };
   }
-  return {
-    redirect: {
-      destination: '/',
-      permanent: false,
-    },
-  };
 };
 
 export default HomePage;

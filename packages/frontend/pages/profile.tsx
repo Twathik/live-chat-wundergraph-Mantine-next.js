@@ -22,21 +22,28 @@ const Profile = ({ userData }: ProfileProps) => (
 export const getServerSideProps: GetServerSideProps = async ({
   req,
 }: GetServerSidePropsContext) => {
-  const client = new Client({ extraHeaders: { cookie: req.headers.cookie || '' } });
-  const userData = await client.query.GetUser({});
-  if (userData.status === 'ok') {
+  try {
+    const client = new Client({ extraHeaders: { cookie: req.headers.cookie || '' } });
+    const userData = await client.query.GetUser({});
+    if (userData.status === 'ok') {
+      return {
+        props: {
+          userData: userData.body.data!.usersDb_findUniqueUser,
+        },
+      };
+    }
     return {
-      props: {
-        userData: userData.body.data!.usersDb_findUniqueUser,
+      redirect: {
+        destination: '/',
+        permanent: false,
       },
     };
+  } catch (error) {
+    console.log({ error });
+    return {
+      props: {},
+    };
   }
-  return {
-    redirect: {
-      destination: '/',
-      permanent: false,
-    },
-  };
 };
 
 export default Profile;

@@ -19,6 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   try {
     const client = new Client({ extraHeaders: { cookie: req.headers.cookie || '' } });
     const messagesData = await client.query.GetMessages({ input: { skip: 0, take: -10 } });
+    console.log({ messagesData });
 
     if (messagesData.status === 'ok') {
       return {
